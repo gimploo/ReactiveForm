@@ -1,0 +1,39 @@
+form {
+    width: 200px;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.form-address-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option-gender-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.hobby-container {
+    width: full;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    input {
+        min-width: 190px;
+        margin-bottom: 10px;
+    }
+}
+
+.warning-text {
+    color: red;
+    font-size: 13px;
+    font-size: bold;
+}

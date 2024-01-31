@@ -1,0 +1,131 @@
+<form [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+<h1 class="form-heading">Enter Details</h1>
+  <div>
+    <label for="firstName">First Name:</label>
+    <input id="firstName" formControlName="firstname" />
+    <div *ngIf="mainForm.get('firstname')?.hasError('required')">
+      <label class="warning-text">First Name is required.</label>
+    </div>
+    <div *ngIf="mainForm.get('firstname')?.hasError('maxlength')">
+      <label class="warning-text">Maximum length exceeded (20 characters)</label>
+    </div>
+  </div>
+
+  <div>
+    <label for="lastName">Last Name:</label>
+    <input id="lastName" formControlName="lastname" />
+    <div *ngIf="mainForm.get('lastname')?.hasError('required')">
+      <label class="warning-text">Last Name is required.</label>
+    </div>
+    <div *ngIf="mainForm.get('lastname')?.hasError('maxlength')">
+      <label class="warning-text">Maximum length exceeded (20 characters)</label>
+    </div>
+  </div>
+
+  <div>
+    <label for="middleName">Middle Name:</label>
+    <input id="middleName" formControlName="middlename" />
+    <label *ngIf="mainForm.get('middlename')?.hasError('maxlength')" class="warning-text">
+        Maximum length exceeded (20 characters).
+    </label>
+  </div>
+
+  <div>
+    <label for="age">Age:</label>
+    <input id="age" type='number' formControlName="age" />
+    <label *ngIf="mainForm.get('age')?.hasError('required')" class="warning-text">
+      Age is required.
+    </label>
+    <label *ngIf="mainForm.get('age')?.hasError('min')" class="warning-text">
+      Age must be at least 10.
+    </label>
+    <label *ngIf="mainForm.get('age')?.hasError('max')" class="warning-text">
+      Age must be at most 50.
+    </label>
+  </div>
+
+  <div class="option-gender-container">
+    <label>Gender:</label>
+    <label>
+      <input type="radio" value="male" formControlName="gender" /> Male
+    </label>
+    <label>
+      <input type="radio" value="female" formControlName="gender" /> Female
+    </label>
+    <label>
+      <input type="radio" value="other" formControlName="gender" /> Other
+    </label>
+    <label *ngIf="mainForm.get('gender')?.hasError('required')" class="warning-text">
+      Gender is required.
+    </label>
+  </div>
+
+  <div class='form-address-container' formGroupName="addressForm">
+    <label for="street">Street:</label>
+    <input id="street" formControlName="street" />
+    <label *ngIf="mainForm.get('addressForm.street')?.hasError('required')" class="warning-text">
+      Street is required.
+    </label>
+    <label *ngIf="mainForm.get('addressForm.street')?.hasError('maxlength')" class="warning-text">
+      Maximum length exceeded (20 characters).
+    </label>
+
+    <label for="landmark">Landmark:</label>
+    <input id="landmark" formControlName="landmark" />
+     <label *ngIf="mainForm.get('addressForm.landmark')?.hasError('maxlength')" class="warning-text">
+      Maximum length exceeded (20 characters).
+    </label>
+
+    <label for="city">City:</label>
+    <input id="city" formControlName="city" />
+     <label *ngIf="mainForm.get('addressForm.city')?.hasError('required')" class="warning-text">
+      City is required.
+    </label>
+    <label *ngIf="mainForm.get('addressForm.city')?.hasError('maxlength')" class="warning-text">
+      Maximum length exceeded (20 characters).
+    </label>
+
+    <label for="state">State:</label>
+    <input id="state" formControlName="state" />
+    <label *ngIf="mainForm.get('addressForm.state')?.hasError('required')" class="warning-text">
+      State is required.
+    </label>
+    <label *ngIf="mainForm.get('addressForm.state')?.hasError('maxlength')" class="warning-text">
+      Maximum length exceeded (20 characters).
+    </label>
+
+    <label for="zipCode">Zip Code:</label>
+    <input id="zipCode" type='number' formControlName="zipcode" />
+    <label *ngIf="mainForm.get('addressForm.zipcode')?.hasError('required')" class="warning-text">
+      Zip Code is required.
+    </label>
+    <label *ngIf="mainForm.get('addressForm.zipcode')?.hasError('maxlength')" class="warning-text">
+      Maximum length exceeded (20 characters).
+    </label>
+
+    <label for="country">Country:</label>
+    <input id="country" formControlName="country" />
+    <label *ngIf="mainForm.get('addressForm.country')?.hasError('required')" class="warning-text">
+      Country is required.
+    </label>
+    <label *ngIf="mainForm.get('addressForm.country')?.hasError('maxlength')" class="warning-text">
+      Maximum length exceeded (20 characters).
+    </label>
+  </div>
+
+  <div formArrayName="hobbies">
+    <div *ngFor="let hobby of hobbies.controls; let i = index">
+    <div class='hobby-container' [formGroupName]="i">
+        <label for="hobbyName">Hobby {{ i + 1 }}:</label>
+        <input id="hobbyName" formControlName="name" />
+        <label *ngIf="mainForm.get('hobbies')?.get(i.toString() + '.hobbyName')?.hasError('maxlength')" class="warning-text">
+          Maximum length exceeded (20 characters).
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" (click)="addHobbyField()">Add Hobby</button>
+
+  <button type="submit" [disabled]="mainForm.invalid">Submit</button>
+</form>
